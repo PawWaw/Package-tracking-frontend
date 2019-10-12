@@ -1,0 +1,23 @@
+span {
+    margin-left: 10px;
+}
+
+span + span {
+    margin-left: 10px;
+}
+
+.header {
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.toolbar {
+    height: 60px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+}
