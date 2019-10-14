@@ -1,20 +1,18 @@
 <div class="parent">
-  <mat-form-field>
-    <mat-label class="chooseMethod">Choose method</mat-label>
-    <select matNativeControl required>
-      <option value="Get">Get</option>
-      <option value="Post">Post</option>
-      <option value="Put">Put</option>
-      <option value="Delete">Delete</option>
-      <option value="GetAll">GetAll</option>
-    </select>
-  </mat-form-field>
+    <mat-form-field>
+        <mat-label>Choose method</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let method of methods" [value]="method.value">
+            {{method.viewValue}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
 
   <mat-form-field>
-    <textarea matInput placeholder="Textarea"></textarea>
+    <textarea matInput style="resize:none" required placeholder="Delivery code:"></textarea>
   </mat-form-field>
 
-  <button mat-button class="button">Select</button>
+  <button mat-button class="button" (click)="getDelivery()">Select</button>
 
 </div>
   

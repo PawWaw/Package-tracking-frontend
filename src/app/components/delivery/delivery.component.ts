@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigService } from 'src/app/config/config.service';
 
 export interface Method {
   value: string;
@@ -11,8 +12,9 @@ export interface Method {
   styleUrls: ['./delivery.component.css']
 })
 export class DeliveryComponent implements OnInit {
+  delivery;
 
-  constructor() { }
+  constructor(private configService: ConfigService) { }
 
   ngOnInit() {
   }
@@ -24,4 +26,10 @@ export class DeliveryComponent implements OnInit {
     {value: 'DELETE', viewValue: 'Delete'}
   ];
 
+  getDelivery() {
+    this.configService.getNews().subscribe((data)=>{
+      console.log(data);
+      this.delivery = data['delivery'];
+    });
+  }
 }

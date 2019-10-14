@@ -1,0 +1,20 @@
+:host {
+    font-size: 14px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+button{
+    font-size: 18px;
+    border: solid 1px black;
+    position: center;
+    margin: -20px -50px; 
+    position:relative;
+    top:50%; 
+    left:50%;
+}

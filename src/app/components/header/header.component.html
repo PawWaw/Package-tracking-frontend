@@ -1,14 +1,29 @@
 <div class="toolbar" role="banner">
-    <nav>
-        <a routerLink="" class="header">Home</a>
-    </nav>
-    <nav>
-        <a routerLink="/delivery" class="header">Delivery</a>
-    </nav>
-    <nav>
-        <a routerLink="/log-in" class="header">Log In</a>
-    </nav>
-    <nav>
-        <a routerLink="/about" class="header">About</a>
-    </nav>
+    <button mat-button routerLink="" class="header">
+        Home
+    </button>
+    <button mat-button [matMenuTriggerFor]="menu" class="header"> 
+        Companies
+    </button>
+    <button mat-button routerLink="/delivery" class="header">
+        Delivery
+    </button>
+    <button mat-button routerLink="/log-in" class="header">
+        Log In
+    </button>
+    <button mat-button routerLink="/about" class="header"> 
+        About
+    </button>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/allegro">
+            Allegro
+        </button>
+        <button mat-menu-item>
+            eBay
+        </button>
+        <button mat-menu-item>
+            AliExpress
+        </button>
+    </mat-menu>
 </div>
