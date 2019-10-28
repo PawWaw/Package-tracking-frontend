@@ -16,9 +16,18 @@ import {MatButtonModule} from '@angular/material/button';
 import { AboutComponent } from './components/about/about.component'; 
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
-import { AllegroComponent } from './components/allegro/allegro.component';
+import { AllegroComponent } from './components/shops/allegro/allegro.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ConfigComponent } from './config/config.component'
+import { ConfigComponent } from './config/config.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DhlComponent } from './components/deliveryCompanies/dhl/dhl.component';
+import { InpostComponent } from './components/deliveryCompanies/inpost/inpost.component';
+import { PocztaPolskaComponent } from './components/deliveryCompanies/poczta-polska/poczta-polska.component';
+import { FedexComponent } from './components/deliveryCompanies/fedex/fedex.component';
+import { HistoryComponent } from './components/history/history.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +38,13 @@ import { ConfigComponent } from './config/config.component'
     LogInComponent,
     AboutComponent,
     AllegroComponent,
-    ConfigComponent
+    ConfigComponent,
+    FooterComponent,
+    DhlComponent,
+    InpostComponent,
+    PocztaPolskaComponent,
+    FedexComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +60,10 @@ import { ConfigComponent } from './config/config.component'
     MatButtonModule,
     MatMenuModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,3 +3,42 @@
     font-size: 15px;
     text-align: center;
 }
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.homeButton {
+    height: 100px;
+    width: 300px;
+    margin: 6px 8px 6px 8px;
+    border-radius: 5px;
+    background: #e7ecef;
+    margin: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #62b6cb;
+}
+
+.unknownButton {
+    height: 100px;
+    width: 610px;
+    margin: 6px 8px 6px 8px;
+    border-radius: 5px;
+    background: #e7ecef;
+    margin: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #62b6cb;
+}
+
+.homeButton:hover {
+    background: #62b6cb;
+}
+
+.unknownButton:hover {
+    background: #62b6cb;
+}

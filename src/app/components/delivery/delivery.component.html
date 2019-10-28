@@ -1,7 +1,7 @@
 <div class="parent">
     <mat-form-field>
         <mat-label>Choose method</mat-label>
-        <mat-select>
+        <mat-select [(ngModel)]="selectedMethod">
           <mat-option *ngFor="let method of methods" [value]="method.value">
             {{method.viewValue}}
           </mat-option>
@@ -12,9 +12,36 @@
     <textarea matInput style="resize:none" required placeholder="Delivery code:"></textarea>
   </mat-form-field>
 
+  <br>
   <button mat-button class="button" (click)="getDelivery()">Select</button>
 
+  <div>
+      <label *ngFor="let card of jsonData">
+        <h3>Delivery data:</h3>
+         <mat-card-content>
+           <br>
+           ID: {{ card.id }}
+           <br>
+           Code: {{ card.code }}
+           <br>
+           User ID: {{ card.userId }}
+           <br>
+           Ship Start: {{ card.shipStartDate }}
+           <br>
+           Ship End: {{ card.shipEndDate }}
+           <br>
+           History: {{ card.history }}
+           <br>
+           Processing stage: {{ card.processingStage }}
+           <br>
+           Quantity: {{ card.quantity }}
+           <br>
+           Status: {{ card.activeStatus }}
+           <br>
+           Complete: {{ card.complete }}
+          </mat-card-content>
+      </label>
 </div>
-  
+</div>
 
 <router-outlet></router-outlet>

@@ -1,0 +1,25 @@
+.form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;;
+}
+
+.fields {
+    height: 70px;
+    width: 250px;
+}
+
+.button {
+    height: 70px;
+    width: 250px;
+    margin: 30px;
+    border-radius: 5px;
+    background: #e7ecef;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #62b6cb;
+}
+
+.button:hover {
+    background: #62b6cb;
+}

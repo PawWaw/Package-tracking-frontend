@@ -1,21 +1,24 @@
 <div class="toolbar" role="banner">
-    <button mat-button routerLink="" class="header">
+    <button mat-button routerLink="" class="headerMenu">
         Home
     </button>
-    <button mat-button [matMenuTriggerFor]="menu" class="header"> 
-        Companies
+    <button mat-button [matMenuTriggerFor]="shops" class="headerMenu">
+        Shops
     </button>
-    <button mat-button routerLink="/delivery" class="header">
+    <button mat-button [matMenuTriggerFor]="deliveryCompanies" class="headerMenu">
+        Delivery companies
+    </button>
+    <button mat-button routerLink="/delivery" class="headerMenu">
         Delivery
     </button>
-    <button mat-button routerLink="/log-in" class="header">
+    <button mat-button routerLink="/history" class="headerMenu">
+        History
+    </button>
+    <button mat-button routerLink="/log-in" class="rightHeader">
         Log In
     </button>
-    <button mat-button routerLink="/about" class="header"> 
-        About
-    </button>
 
-    <mat-menu #menu="matMenu">
+    <mat-menu #shops="matMenu">
         <button mat-menu-item routerLink="/allegro">
             Allegro
         </button>
@@ -24,6 +27,18 @@
         </button>
         <button mat-menu-item>
             AliExpress
+        </button>
+    </mat-menu>
+
+    <mat-menu #deliveryCompanies="matMenu">
+        <button mat-menu-item routerLink="/pocztaPolska">
+            Poczta Polska
+        </button>
+        <button mat-menu-item routerLink="/inPost">
+            InPost
+        </button>
+        <button mat-menu-item routerLink="/fedex">
+            Fedex
         </button>
     </mat-menu>
 </div>

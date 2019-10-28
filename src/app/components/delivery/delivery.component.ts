@@ -1,9 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from 'src/app/config/config.service';
+import { FormControl } from '@angular/forms';
 
 export interface Method {
   value: string;
   viewValue: string;
+}
+
+export class Delivery {
+  id: string;
+  code: string;
+  userId: string;
+  quantity: number;
+  shipStartDate: Date;
+  shipEndDate: Date;
+  processingStage: string;
+  activeStatus: string;
+  history: object;
+  complete: boolean;
 }
 
 @Component({
@@ -13,10 +27,14 @@ export interface Method {
 })
 export class DeliveryComponent implements OnInit {
   delivery;
+  selectedMethod: Delivery;
+  data;
+  jsonData: any = [];
 
   constructor(private configService: ConfigService) { }
 
   ngOnInit() {
+
   }
 
   methods: Method[] = [
@@ -27,9 +45,20 @@ export class DeliveryComponent implements OnInit {
   ];
 
   getDelivery() {
-    this.configService.getNews().subscribe((data)=>{
-      console.log(data);
-      this.delivery = data['delivery'];
-    });
+    if(this.selectedMethod.toString() == "GET") {
+      this.configService.getNews().subscribe((data)=>{
+        this.jsonData.push(data);
+        console.log(data)
+      });
+    }
+    else if(this.selectedMethod.toString() == "POST") {
+
+    }
+    else if(this.selectedMethod.toString() == "PUT") {
+
+    }
+    else {
+
+    }
   }
 }

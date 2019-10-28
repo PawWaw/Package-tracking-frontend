@@ -1,15 +1,22 @@
-.header {
+.headerMenu {
     margin-left: 10px;
-    color: white;
+    color: #e7ecef;
     text-decoration: none;
 }
 
 .toolbar {
-    height: 60px;
-    margin: -8px;
+    height: 50px;
     display: flex;
     align-items: center;
-    background-color: #1976d2;
-    color: white;
+    background-color: #1b4965;
+    color: #e7ecef;
     font-weight: 600;
+}
+
+.rightHeader {
+    margin-left: 10px;
+    color: #e7ecef;
+    text-decoration: none;
+    position: absolute;
+    right: 0px;
 }
