@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { ConfigService } from 'src/app/config/config.service';
+import { Observable } from 'rxjs';
+import { timeout } from 'q';
+
+export interface Method {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-allegro',
@@ -7,10 +15,24 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./allegro.component.css']
 })
 export class AllegroComponent implements OnInit {
+  data: boolean = false;
+  selectedMethod: any;
+  objects = [];
 
-  constructor(private _snackBar: MatSnackBar) { }
+  methods: Method[] = [
+    {value: 'me', viewValue: 'My account'},
+  ];
+
+  constructor(private _snackBar: MatSnackBar, private configService: ConfigService) { }
 
   ngOnInit() {
+    this.configService.allegroGetToken().subscribe((data)=>{
+      console.log(data);
+      if(data.toString() == "true")
+        this.data = true;
+      else
+        this.data = false;
+    });
   }
 
   openSnackBar() {
@@ -19,6 +41,27 @@ export class AllegroComponent implements OnInit {
       this._snackBar.open("Done!", "Close", { //change to "if tracking number is correct"
         duration: 2000,
       });
+    }
+  }
+
+  goToAuth(url: string){
+    window.open(url, "_blank");
+    window.location.reload();
+  }
+
+  logOut(){
+    this.configService.allegroEraseToken().subscribe((data)=>{
+      console.log(data)
+    });;
+    window.location.reload();
+  }
+
+  show(){
+    if(this.selectedMethod.toString() == "me") {
+      this.configService.allegroGetMe().subscribe((data)=>{
+        console.log(data);
+        this.objects.push(data);
+      })
     }
   }
 }

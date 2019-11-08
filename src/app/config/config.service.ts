@@ -15,7 +15,27 @@ export class ConfigService {
 
   constructor(private http: HttpClient) { }
 
-  public getNews(){
-    return this.http.get('http://localhost:8080/delivery/string');
+  public getNews(code: String){
+    return this.http.get('http://localhost:8080/delivery/' + code);
+  }
+
+  public getInPost(code: String){
+    return this.http.get('http://localhost:8080/package/inpost/' + code);
+  }
+
+  public getPocztaPolska(code: String){
+    return this.http.get('http://localhost:8080/package/pocztapolska/' + code);
+  }
+
+  public allegroGetToken(){
+    return this.http.get('http://localhost:8080/allegro/checkToken');
+  }
+
+  public allegroEraseToken(){
+    return this.http.get('http://localhost:8080/allegro/erase');
+  }
+
+  public allegroGetMe(){
+    return this.http.get('http://localhost:8080/allegro/me');
   }
 }

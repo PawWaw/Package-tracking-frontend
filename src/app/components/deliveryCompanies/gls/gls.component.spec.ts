@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DeliveryComponent } from './delivery.component';
 
-describe('DeliveryComponent', () => {
-  let component: DeliveryComponent;
-  let fixture: ComponentFixture<DeliveryComponent>;
+import { GlsComponent } from './gls.component';
+
+describe('GlsComponent', () => {
+  let component: GlsComponent;
+  let fixture: ComponentFixture<GlsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeliveryComponent ]
+      declarations: [ GlsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeliveryComponent);
+    fixture = TestBed.createComponent(GlsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

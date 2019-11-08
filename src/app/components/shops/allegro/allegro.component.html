@@ -1,13 +1,32 @@
 <html>
     <body>
-        <form class="form">         
-            <mat-form-field class="fields">
-                <textarea matInput style="resize:none" placeholder="Login:"></textarea>
-            </mat-form-field>
-            <mat-form-field class="fields">
-                <textarea matInput style="resize:none" placeholder="Password:"></textarea>
-            </mat-form-field>
-            <button mat-raised-button class="button" (click)="openSnackBar()">Log In</button>
+        <div *ngIf="data == false">
+            <form class="form">         
+                <mat-label>Click "Login" to log to your personal allegro account</mat-label>
+                <br>
+                <button mat-raised-button class="button" (click)="goToAuth('https://allegro.pl.allegrosandbox.pl/auth/oauth/authorize?response_type=code&client_id=8dc210ae93144ac1adde3409c34ce54c&redirect_uri=http://localhost:8080/allegro')">Log In</button>
+            </form>
+        </div>
+        <div *ngIf="data == true">
+        <mat-form-field class="form">
+            <mat-label>Choose method</mat-label>
+            <mat-select [(ngModel)]="selectedMethod">
+              <mat-option *ngFor="let method of methods" [value]="method.value">
+                {{method.viewValue}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>    
+        <form class="form">
+            <button mat-raised-button class="button" (click)="show()">Show</button>
+            <button mat-raised-button class="button" (click)="logOut()">Log out</button>
         </form>
+        <mat-list *ngFor="let object of objects">
+            <mat-list-item>
+                <!-- <div> -->
+                    {{ object | json }}
+                <!-- </div> -->
+            </mat-list-item>
+        </mat-list>
+        </div>
     </body>
 </html>

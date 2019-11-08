@@ -9,13 +9,13 @@
     </mat-form-field>
 
   <mat-form-field>
-    <textarea matInput style="resize:none" required placeholder="Delivery code:"></textarea>
+    <textarea matInput style="resize:none" required placeholder="Delivery code:" #code></textarea>
   </mat-form-field>
 
   <br>
-  <button mat-button class="button" (click)="getDelivery()">Select</button>
+  <button mat-button class="button" (click)="getDelivery(code.value)">Select</button>
 
-  <div>
+  <!-- <div>
       <label *ngFor="let card of jsonData">
         <h3>Delivery data:</h3>
          <mat-card-content>
@@ -41,7 +41,7 @@
            Complete: {{ card.complete }}
           </mat-card-content>
       </label>
-</div>
+</div> -->
 </div>
 
 <router-outlet></router-outlet>

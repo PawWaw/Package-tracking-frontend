@@ -10,6 +10,9 @@ import { PocztaPolskaComponent } from './components/deliveryCompanies/poczta-pol
 import { InpostComponent } from './components/deliveryCompanies/inpost/inpost.component';
 import { FedexComponent } from './components/deliveryCompanies/fedex/fedex.component';
 import { HistoryComponent } from './components/history/history.component';
+import { GlsComponent } from './components/deliveryCompanies/gls/gls.component';
+import { UpsComponent } from './components/deliveryCompanies/ups/ups.component';
+import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown.component';
 
 
 const routes: Routes = [
@@ -41,7 +44,16 @@ const routes: Routes = [
     path: 'fedex', component: FedexComponent, pathMatch: 'full'
   },
   {
+    path: 'gls', component: GlsComponent, pathMatch: 'full'
+  },
+  {
+    path: 'ups', component: UpsComponent, pathMatch: 'full'
+  },
+  {
     path: 'history', component: HistoryComponent, pathMatch: 'full'
+  },
+  {
+    path: 'unknown', component: UnknownComponent, pathMatch: 'full'
   }
 ];
 

@@ -28,6 +28,10 @@ import { InpostComponent } from './components/deliveryCompanies/inpost/inpost.co
 import { PocztaPolskaComponent } from './components/deliveryCompanies/poczta-polska/poczta-polska.component';
 import { FedexComponent } from './components/deliveryCompanies/fedex/fedex.component';
 import { HistoryComponent } from './components/history/history.component';
+import { MatListModule } from '@angular/material/list';
+import { UpsComponent } from './components/deliveryCompanies/ups/ups.component';
+import { GlsComponent } from './components/deliveryCompanies/gls/gls.component';
+import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,10 @@ import { HistoryComponent } from './components/history/history.component';
     InpostComponent,
     PocztaPolskaComponent,
     FedexComponent,
-    HistoryComponent
+    HistoryComponent,
+    UpsComponent,
+    GlsComponent,
+    UnknownComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +70,8 @@ import { HistoryComponent } from './components/history/history.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

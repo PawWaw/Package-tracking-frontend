@@ -44,9 +44,9 @@ export class DeliveryComponent implements OnInit {
     {value: 'DELETE', viewValue: 'Delete'}
   ];
 
-  getDelivery() {
+  getDelivery(code: String) {
     if(this.selectedMethod.toString() == "GET") {
-      this.configService.getNews().subscribe((data)=>{
+      this.configService.getNews(code).subscribe((data)=>{
         this.jsonData.push(data);
         console.log(data)
       });

@@ -2,9 +2,67 @@
     <body>
         <form class="form">         
             <mat-form-field class="fields">
-                <textarea matInput style="resize:none" placeholder="Add your tracking number"></textarea>
+                <textarea matInput style="resize:none" placeholder="Add your tracking number" #code></textarea>
             </mat-form-field>
-            <button mat-raised-button class="button" (click)="openSnackBar()">Find!</button>
+            <button mat-raised-button class="button" (click)="openSnackBar(code.value)">Find!</button>
         </form>
+        <mat-list *ngFor="let object of objects">
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Package code: </b> {{ object.code }}
+                <!-- </div> -->
+            </mat-list-item>
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Updated at: </b> {{ object.updated_at }}
+                <!-- </div> -->
+            </mat-list-item>
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Service: </b> {{ object.service }}
+                <!-- </div> -->
+            </mat-list-item>
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Tracking number: </b> {{ object.tracking_number }}
+                <!-- </div> -->
+            </mat-list-item>
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Creation date: </b> {{ object.created_at }}
+                <!-- </div> -->
+            </mat-list-item>
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Tracking details: </b>
+                    <mat-list *ngFor="let details of object.tracking_details">
+                        <mat-list-item>
+                            {{ details.status }}
+                        </mat-list-item>
+                    </mat-list>
+                <!-- </div> -->
+            </mat-list-item>
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Status: </b> {{ object.status }}
+                <!-- </div> -->
+            </mat-list-item>
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Dropoff machine:</b>
+                    Code: {{ object.custom_attributes.dropoff_machine_detail.name }}
+                    Location: {{ object.custom_attributes.dropoff_machine_detail.address.line1 }} {{ object.custom_attributes.dropoff_machine_detail.address.line2 }}
+                    Description: {{ object.custom_attributes.dropoff_machine_detail.location_description }}
+                <!-- </div> -->
+            </mat-list-item>
+            <mat-list-item>
+                <!-- <div> -->
+                    <b>Target machine:</b>
+                    Code: {{ object.custom_attributes.target_machine_detail.name }}
+                    Location: {{ object.custom_attributes.target_machine_detail.address.line1 }} {{ object.custom_attributes.target_machine_detail.address.line2 }}
+                    Description: {{ object.custom_attributes.target_machine_detail.location_description }}
+                <!-- </div> -->
+            </mat-list-item>
+        </mat-list>
     </body>
 </html>
