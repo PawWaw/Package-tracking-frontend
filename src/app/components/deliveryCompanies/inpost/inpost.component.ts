@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import { ConfigService } from 'src/app/config/config.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PackageService } from '../../_services/package.service';
+import { first } from "rxjs/operators";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-inpost',
@@ -8,25 +11,42 @@ import { ConfigService } from 'src/app/config/config.service';
   styleUrls: ['./inpost.component.css']
 })
 export class InpostComponent implements OnInit {
-  data: any;
-  objects = [];
 
-  constructor(private _snackBar: MatSnackBar, private configService: ConfigService) { }
+  formGroup: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    private packageService: PackageService
+  ) { }
 
   ngOnInit() {
+    if (localStorage.getItem('current_user') == null) {
+      this.router.navigate(['/signin']);
+      this._snackBar.open("Log in to see your history!", "Close", {
+      duration: 2000,
+    });
+    }
+    this.formGroup = this.formBuilder.group({
+      packageCode: ['', [Validators.required]]
+    });
   }
 
-  openSnackBar(code: String) {
-    this.objects.splice(0,1);
-    this.configService.getInPost(code).subscribe((object: Response)=>{
-      this.objects.push(object);
-      console.log(this.objects);
+  get packageCode() {return this.formGroup.get('packageCode');}
+
+  findPackage() {
+    this.packageService.getSingleInPost(this.packageCode.value.toString()).pipe(first()).subscribe(
+      data => {
+        console.log(data);
+      }
+    )
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
+    this._snackBar.open("Done!", "Close", { 
+      duration: 2000,
     });
-    if(true)
-    {
-      this._snackBar.open("Done!", "Close", { //change to "if tracking number is correct"
-        duration: 2000,
-      });
-    }
   }
 }

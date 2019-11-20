@@ -14,9 +14,17 @@
 }
 
 .rightHeader {
-    margin-left: 10px;
+    margin-right: 10px;
     color: #e7ecef;
     text-decoration: none;
     position: absolute;
     right: 0px;
+}
+
+.signup {
+    margin-right: 10px;
+    color: #e7ecef;
+    text-decoration: none;
+    position: absolute;
+    right: 80px;
 }

@@ -14,8 +14,11 @@
     <button mat-button routerLink="/history" class="headerMenu">
         History
     </button>
-    <button mat-button routerLink="/log-in" class="rightHeader">
-        Log In
+    <button mat-button routerLink="/signup" class="signup">
+        Sign Up
+    </button>
+    <button mat-button routerLink="/signin" class="rightHeader">
+        Sign In
     </button>
 
     <mat-menu #shops="matMenu">
@@ -25,20 +28,26 @@
         <button mat-menu-item>
             eBay
         </button>
-        <button mat-menu-item>
-            AliExpress
-        </button>
     </mat-menu>
 
     <mat-menu #deliveryCompanies="matMenu">
-        <button mat-menu-item routerLink="/pocztaPolska">
-            Poczta Polska
+        <button mat-menu-item routerLink="/dhl">
+            DHL
+        </button>
+        <button mat-menu-item routerLink="/fedex">
+            Fedex
+        </button>
+        <button mat-menu-item routerLink="/gls">
+            GLS
         </button>
         <button mat-menu-item routerLink="/inPost">
             InPost
         </button>
-        <button mat-menu-item routerLink="/fedex">
-            Fedex
+        <button mat-menu-item routerLink="/pocztaPolska">
+            Poczta Polska
+        </button>
+        <button mat-menu-item routerLink="/ups">
+            UPS
         </button>
     </mat-menu>
 </div>

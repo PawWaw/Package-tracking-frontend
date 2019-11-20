@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { HomeComponent } from './components/home/home.component';
-import { LogInComponent } from './components/log-in/log-in.component';
+import { SignInComponent } from './components/signin/signin.component';
 import { AboutComponent } from './components/about/about.component';
 import { AllegroComponent } from './components/shops/allegro/allegro.component';
 import { DhlComponent } from './components/deliveryCompanies/dhl/dhl.component';
@@ -13,6 +13,7 @@ import { HistoryComponent } from './components/history/history.component';
 import { GlsComponent } from './components/deliveryCompanies/gls/gls.component';
 import { UpsComponent } from './components/deliveryCompanies/ups/ups.component';
 import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown.component';
+import { SignUpComponent } from './components/signup/signup.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,7 @@ const routes: Routes = [
     path: '', component: HomeComponent, pathMatch: 'full'
   },
   {
-    path: 'log-in', component: LogInComponent, pathMatch: 'full'
+    path: 'signin', component: SignInComponent, pathMatch: 'full'
   },
   {
     path: 'about', component: AboutComponent, pathMatch: 'full'
@@ -54,6 +55,12 @@ const routes: Routes = [
   },
   {
     path: 'unknown', component: UnknownComponent, pathMatch: 'full'
+  },
+  {
+    path: 'signup', component: SignUpComponent, pathMatch: 'full'
+  },
+  { 
+    path: '**', redirectTo: 'home' 
   }
 ];
 

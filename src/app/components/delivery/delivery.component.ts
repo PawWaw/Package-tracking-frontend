@@ -48,7 +48,6 @@ export class DeliveryComponent implements OnInit {
     if(this.selectedMethod.toString() == "GET") {
       this.configService.getNews(code).subscribe((data)=>{
         this.jsonData.push(data);
-        console.log(data)
       });
     }
     else if(this.selectedMethod.toString() == "POST") {

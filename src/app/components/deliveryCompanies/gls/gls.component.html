@@ -1,11 +1,10 @@
 <html>
     <body>
-        <form class="form">         
+        <form class="form" [formGroup]="formGroup">         
             <mat-form-field class="fields">
-                <textarea matInput style="resize:none" placeholder="Add your tracking number"></textarea>
+                <textarea matInput style="resize:none" placeholder="Add your tracking number" formControlName="packageCode"></textarea>
             </mat-form-field>
-            <button mat-raised-button class="button" (click)="openSnackBar()">Find!</button>
+            <button mat-raised-button class="button" (click)="findPackage()">Find!</button>
         </form>
     </body>
 </html>
-

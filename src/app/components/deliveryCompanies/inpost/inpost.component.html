@@ -1,10 +1,10 @@
 <html>
     <body>
-        <form class="form">         
+        <form class="form" [formGroup]="formGroup">         
             <mat-form-field class="fields">
-                <textarea matInput style="resize:none" placeholder="Add your tracking number" #code></textarea>
+                <textarea matInput style="resize:none" placeholder="Add your tracking number" formControlName="packageCode"></textarea>
             </mat-form-field>
-            <button mat-raised-button class="button" (click)="openSnackBar(code.value)">Find!</button>
+            <button mat-raised-button class="button" (click)="findPackage()">Find!</button>
         </form>
         <mat-list *ngFor="let object of objects">
             <mat-list-item>

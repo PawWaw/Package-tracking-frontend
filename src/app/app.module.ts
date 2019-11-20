@@ -1,23 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
-import { LogInComponent } from './components/log-in/log-in.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SignInComponent } from './components/signin/signin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule} from '@angular/material/button';
 import { AboutComponent } from './components/about/about.component'; 
-import {MatMenuModule} from '@angular/material/menu';
-import {MatSelectModule} from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { AllegroComponent } from './components/shops/allegro/allegro.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ConfigComponent } from './config/config.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
@@ -32,6 +31,10 @@ import { MatListModule } from '@angular/material/list';
 import { UpsComponent } from './components/deliveryCompanies/ups/ups.component';
 import { GlsComponent } from './components/deliveryCompanies/gls/gls.component';
 import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown.component';
+import { SignUpComponent } from './components/signup/signup.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthInterceptor } from "./components/interceptor/auth-interceptor";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,7 @@ import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown
     DeliveryComponent,
     HeaderComponent,
     HomeComponent,
-    LogInComponent,
+    SignInComponent,
     AboutComponent,
     AllegroComponent,
     ConfigComponent,
@@ -51,7 +54,8 @@ import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown
     HistoryComponent,
     UpsComponent,
     GlsComponent,
-    UnknownComponent
+    UnknownComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +75,16 @@ import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown
     ReactiveFormsModule,
     MatCardModule,
     MatSnackBarModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule,
+    OAuthModule.forRoot()
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

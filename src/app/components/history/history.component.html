@@ -1,7 +1,7 @@
 <div>
     <form class="form">    
       <mat-form-field class="fields">
-        <mat-label>Source of data</mat-label>
+        <mat-label>Source of data</mat-label >
         <mat-select [formControl]="companyControl">
           <mat-optgroup *ngFor="let group of companyGroups" [label]="group.name"
                         [disabled]="group.disabled">
@@ -11,6 +11,7 @@
           </mat-optgroup>
         </mat-select>
       </mat-form-field>
-      <button mat-raised-button class="button" (click)="openSnackBar()">Find!</button>
+      <button mat-raised-button class="button" (click)="findPackages()">Find!</button>
+      <button mat-raised-button class="button" (click)="logout()">Logout!</button>
     </form>
 </div>
