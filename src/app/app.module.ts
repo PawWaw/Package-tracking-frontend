@@ -29,7 +29,6 @@ import { FedexComponent } from './components/deliveryCompanies/fedex/fedex.compo
 import { HistoryComponent } from './components/history/history.component';
 import { MatListModule } from '@angular/material/list';
 import { UpsComponent } from './components/deliveryCompanies/ups/ups.component';
-import { GlsComponent } from './components/deliveryCompanies/gls/gls.component';
 import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown.component';
 import { SignUpComponent } from './components/signup/signup.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
@@ -53,7 +52,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FedexComponent,
     HistoryComponent,
     UpsComponent,
-    GlsComponent,
     UnknownComponent,
     SignUpComponent
   ],

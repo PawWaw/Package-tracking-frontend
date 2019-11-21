@@ -36,7 +36,7 @@ export class FedexComponent implements OnInit {
   get packageCode() {return this.formGroup.get('packageCode');}
 
   findPackage() {
-    this.packageService.getSingleDHL(this.packageCode.value.toString()).pipe(first()).subscribe(
+    this.packageService.getSingleFedex(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
         console.log(data);
       }

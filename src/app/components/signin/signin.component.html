@@ -14,12 +14,12 @@
       <button mat-raised-button class="button"><span>Login! </span></button>
   
       <a class="login-error-text" *ngIf="error">Invalid username or password!</a>
-  
-      <mat-spinner class="spinner" diameter=30 *ngIf="loading"></mat-spinner>
-  
+
       <div class="sign-in-text">
         <a>Don't have account yet? </a><a class="link" routerLink="/signup" routerLinkActive="active">Create it now!</a>
       </div>
+
+      <mat-spinner class="spinner" diameter=50 *ngIf="loading"></mat-spinner>
     </form>
   
   </div>

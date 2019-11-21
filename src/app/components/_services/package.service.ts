@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 import { InPost } from 'src/app/components/_models/InPost';
 import { DHL } from 'src/app/components/_models/DHL';
-import { GLS } from 'src/app/components/_models/GLS';
 import { PocztaPolska } from 'src/app/components/_models/PocztaPolska';
 import { UPS } from 'src/app/components/_models/UPS';
 import { Fedex } from 'src/app/components/_models/Fedex';
@@ -15,7 +14,6 @@ import { catchError, retry } from "rxjs/operators";
 })
 export class PackageService {
   dhlurl = 'http://localhost:8080/package/dhl';
-  glsurl = 'http://localhost:8080/package/gls';
   inposturl = 'http://localhost:8080/package/inpost';
   pocztapolskaturl = 'http://localhost:8080/package/pocztapolska';
   upsurl = 'http://localhost:8080/package/ups';
@@ -42,14 +40,6 @@ export class PackageService {
 
   public getSingleFedex(code: string): Observable<Fedex> {
     return this.http.get<Fedex>(this.fedexurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
-  }
-
-  public getGLS(): Observable<GLS> {
-    return this.http.get<GLS>(this.glsurl, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
-  }
-
-  public getSingleGLS(code: string): Observable<GLS> {
-    return this.http.get<GLS>(this.glsurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
   public getInPost(): Observable<InPost> {

@@ -55,7 +55,6 @@ export class HistoryComponent implements OnInit {
       company: [
         {value: 'dhl-0', viewValue: 'DHL'},
         {value: 'fedex-1', viewValue: 'Fedex'},
-        {value: 'gls-2', viewValue: 'GLS'},        
         {value: 'inpost-3', viewValue: 'InPost'},
         {value: 'pocztaPolska-4', viewValue: 'Poczta Polska'},
         {value: 'ups-5', viewValue: 'UPS'}
@@ -81,15 +80,6 @@ export class HistoryComponent implements OnInit {
     else if(this.companyControl.value == "fedex-1")
     {
       this.packageService.getFedex().pipe(first()).subscribe(
-        data => {
-          console.log(data);
-        }
-      )
-      this.openSnackBar();
-    }
-    else if(this.companyControl.value == "gls-2")
-    {
-      this.packageService.getGLS().pipe(first()).subscribe(
         data => {
           console.log(data);
         }
