@@ -4,6 +4,7 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { DHL } from '../../_models/DHL';
 
 @Component({
   selector: 'app-dhl',
@@ -11,6 +12,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./dhl.component.css']
 })
 export class DhlComponent implements OnInit {
+  data: DHL;
+  isAnyPackage: Boolean = false;
 
   formGroup: FormGroup;
 
@@ -38,7 +41,12 @@ export class DhlComponent implements OnInit {
   findPackage() {
     this.packageService.getSingleDHL(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
-        console.log(data);
+        this.data = data;
+        console.log(this.data);
+        this.isAnyPackage = true;
+      },
+      error => {
+        this.isAnyPackage = false;
       }
     )
     this.openSnackBar();

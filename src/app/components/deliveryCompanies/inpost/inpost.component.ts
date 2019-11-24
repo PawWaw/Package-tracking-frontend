@@ -4,6 +4,7 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { InPost } from '../../_models/InPost';
 
 @Component({
   selector: 'app-inpost',
@@ -11,6 +12,9 @@ import { Router } from "@angular/router";
   styleUrls: ['./inpost.component.css']
 })
 export class InpostComponent implements OnInit {
+
+  data: InPost;
+  isAnyPackage: Boolean = false;
 
   formGroup: FormGroup;
 
@@ -22,6 +26,7 @@ export class InpostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isAnyPackage = false;
     if (localStorage.getItem('current_user') == null) {
       this.router.navigate(['/signin']);
       this._snackBar.open("Log in to see your history!", "Close", {
@@ -38,7 +43,13 @@ export class InpostComponent implements OnInit {
   findPackage() {
     this.packageService.getSingleInPost(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
-        console.log(data);
+        this.data = data;
+        console.log(this.data.status);
+        if(this.data != null)
+          this.isAnyPackage = true;
+      },
+      error=>{
+        this.isAnyPackage = false;
       }
     )
     this.openSnackBar();

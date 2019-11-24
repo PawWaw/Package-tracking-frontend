@@ -4,6 +4,7 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { UPS } from '../../_models/UPS';
 
 @Component({
   selector: 'app-ups',
@@ -11,6 +12,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./ups.component.css']
 })
 export class UpsComponent implements OnInit {
+  data: UPS;
+  isAnyPackage: Boolean;
 
   formGroup: FormGroup;
 
@@ -38,7 +41,12 @@ export class UpsComponent implements OnInit {
   findPackage() {
     this.packageService.getSingleUPS(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
-        console.log(data);
+        this.data = data
+        console.log(this.data);
+        this.isAnyPackage = true;
+      },
+      error => {
+        this.isAnyPackage = false;
       }
     )
     this.openSnackBar();

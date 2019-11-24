@@ -6,5 +6,15 @@
             </mat-form-field>
             <button mat-raised-button class="button" (click)="findPackage()">Find!</button>
         </form>
+        <div *ngIf="isAnyPackage" class="form">
+            <p>Tracking number: {{ this.data.code }}</p>
+            <p>Send country: {{ this.data.sendCountry }}</p>
+            <p>Arrival country: {{ this.data.arrivalCountry }}</p>
+            <p>Send data: {{ this.data.sendDate }}</p>
+            <p>Send post office: {{ this.data.sendPostOffice }}</p>
+            <p>Arrival post office: {{ this.data.arrivalPostOffice }}</p>
+            <p>Delivered: {{ this.data.deliveredFlag }}</p>
+
+        </div>
     </body>
 </html>

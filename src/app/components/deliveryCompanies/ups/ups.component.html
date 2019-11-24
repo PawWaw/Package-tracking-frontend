@@ -6,6 +6,10 @@
             </mat-form-field>
             <button mat-raised-button class="button" (click)="findPackage()">Find!</button>
         </form>
+        <div *ngIf="isAnyPackage" class="form">
+            <p>Tracking code: {{ this.data.code }}</p>
+            <p>Status: {{ this.data.status }}</p>
+        </div>
     </body>
 </html>
 

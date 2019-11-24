@@ -4,6 +4,7 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { PocztaPolska } from '../../_models/PocztaPolska';
 
 @Component({
   selector: 'app-poczta-polska',
@@ -11,6 +12,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./poczta-polska.component.css']
 })
 export class PocztaPolskaComponent implements OnInit {
+  data: PocztaPolska;
+  isAnyPackage: Boolean = false;
 
   formGroup: FormGroup;
 
@@ -38,7 +41,12 @@ export class PocztaPolskaComponent implements OnInit {
   findPackage() {
     this.packageService.getSinglePocztaPolska(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
-        console.log(data);
+        this.data = data;
+        console.log(this.data);
+        this.isAnyPackage = true;
+      },
+      error => {
+        this.isAnyPackage = false;
       }
     )
     this.openSnackBar();

@@ -4,6 +4,7 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { Fedex } from '../../_models/Fedex';
 
 @Component({
   selector: 'app-fedex',
@@ -11,6 +12,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./fedex.component.css']
 })
 export class FedexComponent implements OnInit {
+  data: Fedex;
+  isAnyPackage: Boolean = false;
 
   formGroup: FormGroup;
 
@@ -38,7 +41,12 @@ export class FedexComponent implements OnInit {
   findPackage() {
     this.packageService.getSingleFedex(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
-        console.log(data);
+        this.data = data
+        console.log(this.data);
+        this.isAnyPackage = true;
+      },
+      error => {
+        this.isAnyPackage = false;
       }
     )
     this.openSnackBar();
