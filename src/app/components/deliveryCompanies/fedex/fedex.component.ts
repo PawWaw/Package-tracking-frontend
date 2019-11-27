@@ -4,7 +4,8 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { Fedex } from '../../_models/Fedex';
+import { Fedex } from '../../_models/FedexModels/Fedex';
+import { FedexDetails } from '../../_models/FedexModels/FedexDetails';
 
 @Component({
   selector: 'app-fedex',
@@ -13,6 +14,7 @@ import { Fedex } from '../../_models/Fedex';
 })
 export class FedexComponent implements OnInit {
   data: Fedex;
+  details: FedexDetails;
   isAnyPackage: Boolean = false;
 
   formGroup: FormGroup;
@@ -27,7 +29,7 @@ export class FedexComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('current_user') == null) {
       this.router.navigate(['/signin']);
-      this._snackBar.open("Log in to see your history!", "Close", {
+      this._snackBar.open("Sign in to do this operation!", "Close", {
       duration: 2000,
     });
     }
@@ -42,7 +44,9 @@ export class FedexComponent implements OnInit {
     this.packageService.getSingleFedex(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
         this.data = data
+        this.details = this.data.completedTrackDetails;
         console.log(this.data);
+        console.log(this.details);
         this.isAnyPackage = true;
       },
       error => {

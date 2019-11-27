@@ -13,6 +13,7 @@ import { HistoryComponent } from './components/history/history.component';
 import { UpsComponent } from './components/deliveryCompanies/ups/ups.component';
 import { UnknownComponent } from './components/deliveryCompanies/unknown/unknown.component';
 import { SignUpComponent } from './components/signup/signup.component';
+import { OfficialSitesComponent } from './components/official-sites/official-sites.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,9 @@ const routes: Routes = [
   },
   { 
     path: '**', redirectTo: 'home' 
+  },
+  {
+    path: 'otherTracks', component: OfficialSitesComponent
   }
 ];
 

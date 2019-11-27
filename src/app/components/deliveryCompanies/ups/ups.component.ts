@@ -4,7 +4,8 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { UPS } from '../../_models/UPS';
+import { UPS } from '../../_models/UPSModels/UPS';
+import { _Package } from '../../_models/UPSModels/_Package';
 
 @Component({
   selector: 'app-ups',
@@ -27,7 +28,7 @@ export class UpsComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('current_user') == null) {
       this.router.navigate(['/signin']);
-      this._snackBar.open("Log in to see your history!", "Close", {
+      this._snackBar.open("Sign in to do this operation!", "Close", {
       duration: 2000,
     });
     }
@@ -41,8 +42,9 @@ export class UpsComponent implements OnInit {
   findPackage() {
     this.packageService.getSingleUPS(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
-        this.data = data
+        this.data = data;
         console.log(this.data);
+        console.log(this.data.trackResponse);
         this.isAnyPackage = true;
       },
       error => {

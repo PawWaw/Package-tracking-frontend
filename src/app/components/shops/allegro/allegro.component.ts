@@ -3,6 +3,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { ConfigService } from 'src/app/config/config.service';
 import { Observable } from 'rxjs';
 import { timeout } from 'q';
+import { Router } from '@angular/router';
 
 export interface Method {
   value: string;
@@ -23,9 +24,15 @@ export class AllegroComponent implements OnInit {
     {value: 'me', viewValue: 'My account'},
   ];
 
-  constructor(private _snackBar: MatSnackBar, private configService: ConfigService) { }
+  constructor(private _snackBar: MatSnackBar, private configService: ConfigService, private router: Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem('current_user') == null) {
+      this.router.navigate(['/signin']);
+      this._snackBar.open("Sign in to do this operation!", "Close", {
+      duration: 2000,
+    });
+    }
     this.configService.allegroGetToken().subscribe((data)=>{
       console.log(data);
       if(data.toString() == "true")

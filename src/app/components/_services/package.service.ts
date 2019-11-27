@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-import { InPost } from 'src/app/components/_models/InPost';
-import { DHL } from 'src/app/components/_models/DHL';
-import { PocztaPolska } from 'src/app/components/_models/PocztaPolska';
-import { UPS } from 'src/app/components/_models/UPS';
-import { Fedex } from 'src/app/components/_models/Fedex';
+import { InPost } from 'src/app/components/_models/InPostModels/InPost';
+import { DHL } from 'src/app/components/_models/DHLModels/DHL';
+import { PocztaPolska } from 'src/app/components/_models/PocztaPolskaModels/PocztaPolska';
+import { UPS } from 'src/app/components/_models/UPSModels/UPS';
+import { Fedex } from 'src/app/components/_models/FedexModels/Fedex';
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 

@@ -1,3 +1,5 @@
+import { PocztaPolskaDetails } from './PocztaPolskaDetails';
+
 export class PocztaPolska {
     id: string;
     code: string;
@@ -8,6 +10,6 @@ export class PocztaPolska {
     sendPostOffice: string;
     arrivalPostOffice: string;
     deliveredFlag: string;
-    events: any;
+    events: PocztaPolskaDetails;
     userCode: string;
 }

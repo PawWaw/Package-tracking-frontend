@@ -4,7 +4,7 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { PocztaPolska } from '../../_models/PocztaPolska';
+import { PocztaPolska } from '../../_models/PocztaPolskaModels/PocztaPolska';
 
 @Component({
   selector: 'app-poczta-polska',
@@ -27,7 +27,7 @@ export class PocztaPolskaComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('current_user') == null) {
       this.router.navigate(['/signin']);
-      this._snackBar.open("Log in to see your history!", "Close", {
+      this._snackBar.open("Sign in to do this operation!", "Close", {
       duration: 2000,
     });
     }

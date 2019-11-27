@@ -34,6 +34,7 @@ import { SignUpComponent } from './components/signup/signup.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AuthInterceptor } from "./components/interceptor/auth-interceptor";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { OfficialSitesComponent } from './components/official-sites/official-sites.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HistoryComponent,
     UpsComponent,
     UnknownComponent,
-    SignUpComponent
+    SignUpComponent,
+    OfficialSitesComponent
   ],
   imports: [
     BrowserModule,

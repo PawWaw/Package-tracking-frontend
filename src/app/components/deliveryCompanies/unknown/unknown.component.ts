@@ -4,8 +4,8 @@ import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { UPS } from '../../_models/UPS';
-import { Fedex } from '../../_models/Fedex';
+import { UPS } from '../../_models/UPSModels/UPS';
+import { Fedex } from '../../_models/FedexModels/Fedex';
 
 @Component({
   selector: 'app-unknown',
@@ -28,7 +28,7 @@ export class UnknownComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('current_user') == null) {
       this.router.navigate(['/signin']);
-      this._snackBar.open("Log in to see your history!", "Close", {
+      this._snackBar.open("Sign in to do this operation!", "Close", {
       duration: 2000,
     });
     }
