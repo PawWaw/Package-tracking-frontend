@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from "@angular/router";
 import { AuthService } from '../_services/auth.service';
 import { PackageService } from '../_services/package.service';
 import { first } from "rxjs/operators";
 import { Observable, throwError } from "rxjs";
+import { MatTableDataSource } from '@angular/material';
 
 
 export interface Company {
@@ -15,6 +16,7 @@ export interface Company {
 
 export interface CompanyGroup {
   disabled?: boolean;
+
   name: string;
   company: Company[];
 }
@@ -26,12 +28,32 @@ export interface CompanyGroup {
 })
 export class HistoryComponent implements OnInit {
 
+  isDHL: Boolean;
+  isFedex: Boolean;
+  isUPS: Boolean;
+  isInPost: Boolean;
+  isPocztaPolska: Boolean;
+  isAnyPackage: Boolean;
+  dataInPost: any;
+  data: any;
+  dataSource: any;
+  paginator: any;
+
   constructor(
+    private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     private router: Router,
     private auth: AuthService,
     private packageService: PackageService) { 
   }
+
+  formGroup: FormGroup;
+
+  displayedColumns: string[] = ['code', 'datetime', 'place', 'description'];
+  displayedColumnsInPost: string[] = ["code", 'datetime', 'status'];
+  displayedColumnsDHL: string[] = ['code', 'timestamp', 'terminal', 'description'];
+  displayedColumnsFedex: string[] = ['type', 'date'];
+  displayedColumnsUPS: string[] = ['date'];
 
   ngOnInit() {
     if (localStorage.getItem('current_user') == null) {
@@ -40,7 +62,12 @@ export class HistoryComponent implements OnInit {
       duration: 2000,
     });
     }
+    this.formGroup = this.formBuilder.group({
+      packageCode: ['', [Validators.required]]
+    });
   }
+
+  get packageCode() {return this.formGroup.get('packageCode');}
 
   companyControl = new FormControl();
   companyGroups: CompanyGroup[] = [
@@ -72,7 +99,16 @@ export class HistoryComponent implements OnInit {
     {
       this.packageService.getDHL().pipe(first()).subscribe(
         data => {
-          console.log(data);
+          this.data = data;
+          console.log(this.data);
+          this.dataSource = new MatTableDataSource<any>(this.data);
+          setTimeout(() => this.dataSource.paginator = this.paginator);
+          this.isDHL = true;
+          this.isAnyPackage = true;
+          this.isInPost = false;
+          this.isPocztaPolska = false;
+          this.isUPS = false;
+          this.isFedex = false;
         }
       )
       this.openSnackBar();
@@ -82,6 +118,9 @@ export class HistoryComponent implements OnInit {
       this.packageService.getFedex().pipe(first()).subscribe(
         data => {
           console.log(data);
+
+          this.isFedex = true;
+          this.isAnyPackage = true;
         }
       )
       this.openSnackBar();
@@ -90,7 +129,16 @@ export class HistoryComponent implements OnInit {
     {
       this.packageService.getInPost().pipe(first()).subscribe(
         data => {
-          console.log(data);
+          this.data = data;
+          console.log(this.data);
+          this.dataSource = new MatTableDataSource<any>(this.data);
+          setTimeout(() => this.dataSource.paginator = this.paginator);
+          this.isAnyPackage = true;
+          this.isInPost = true;
+          this.isPocztaPolska = false;
+          this.isDHL = false;
+          this.isUPS = false;
+          this.isFedex = false;
         }
       )
       this.openSnackBar();
@@ -99,7 +147,16 @@ export class HistoryComponent implements OnInit {
     {
       this.packageService.getPocztaPolska().pipe(first()).subscribe(
         data => {
-          console.log(data);
+          this.data = data;
+          console.log(this.data);
+          this.dataSource = new MatTableDataSource<any>(this.data);
+          setTimeout(() => this.dataSource.paginator = this.paginator);
+          this.isPocztaPolska = true;
+          this.isAnyPackage = true;
+          this.isDHL = false;
+          this.isUPS = false;
+          this.isFedex = false;
+          this.isInPost = false;
         }
       )
       this.openSnackBar();
@@ -109,6 +166,9 @@ export class HistoryComponent implements OnInit {
       this.packageService.getUPS().pipe(first()).subscribe(
         data => {
           console.log(data);
+
+          this.isUPS = true;
+          this.isAnyPackage = true;
         }
       )
       this.openSnackBar();

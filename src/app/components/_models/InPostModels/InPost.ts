@@ -8,7 +8,7 @@ export class InPost {
     expected_flow: any;
     tracking_number: string;
     created_at: string;
-    tracking_details: InPostDetails;
+    tracking_details: InPostDetails[];
     type: string;
     status: string;
     custom_attributes: string;

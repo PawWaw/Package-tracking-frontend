@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { PocztaPolska } from '../../_models/PocztaPolskaModels/PocztaPolska';
+import { PocztaPolskaDetails } from '../../_models/PocztaPolskaModels/PocztaPolskaDetails';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-poczta-polska',
@@ -13,9 +15,15 @@ import { PocztaPolska } from '../../_models/PocztaPolskaModels/PocztaPolska';
 })
 export class PocztaPolskaComponent implements OnInit {
   data: PocztaPolska;
+  DATA: PocztaPolskaDetails[];
+  dataSource;
   isAnyPackage: Boolean = false;
 
   formGroup: FormGroup;
+
+  displayedColumns: string[] = ['datetime', 'place', 'description'];
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +50,9 @@ export class PocztaPolskaComponent implements OnInit {
     this.packageService.getSinglePocztaPolska(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
         this.data = data;
-        console.log(this.data);
+        this.DATA = this.data.events;
+        this.dataSource = new MatTableDataSource<PocztaPolskaDetails>(this.DATA);
+        setTimeout(() => this.dataSource.paginator = this.paginator);
         this.isAnyPackage = true;
       },
       error => {

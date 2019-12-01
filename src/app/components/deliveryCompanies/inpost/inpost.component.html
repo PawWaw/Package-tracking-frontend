@@ -1,5 +1,6 @@
 <html>
     <body>
+        <div id="con">
         <form class="form" [formGroup]="formGroup">         
             <mat-form-field class="fields">
                 <textarea matInput style="resize:none" placeholder="Add your tracking number" formControlName="packageCode"></textarea>
@@ -7,13 +8,50 @@
             <button mat-raised-button class="button" (click)="findPackage()">Find!</button>
         </form>
         <br>
-        <div *ngIf="isAnyPackage" class="form">
-            <p>Tracking number: {{ this.data.tracking_number }}</p>
-            <p>Created at: {{ this.data.created_at }}</p>
-            <p>Updated at: {{ this.data.updated_at }}</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div *ngIf="isAnyPackage" class="table">
+            <p>Tracking number: {{ this.data.code }}</p>
             <p>Status: {{ this.data.status }}</p>
-            <p>Type: {{ this.data.type }}</p>
-            <p>Service: {{ this.data.service }}</p>
+
+            <table mat-table [dataSource]="dataSource">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="datetime">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let DATA"> {{this.DATA.datetime}} </td>
+                </ng-container>
+            
+                <!-- Name Column -->
+                <ng-container matColumnDef="origin_status">
+                  <th mat-header-cell *matHeaderCellDef> Status code </th>
+                  <td mat-cell *matCellDef="let DATA"> {{ this.DATA.origin_status}} </td>
+                </ng-container>
+            
+                <!-- Weight Column -->
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let DATA"> {{ this.DATA.status}} </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div id="footer">
+            <mat-paginator [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]" class="paginator">
+            </mat-paginator>
+        </div>
         </div>
     </body>
 </html>

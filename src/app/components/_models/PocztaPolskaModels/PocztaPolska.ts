@@ -10,6 +10,6 @@ export class PocztaPolska {
     sendPostOffice: string;
     arrivalPostOffice: string;
     deliveredFlag: string;
-    events: PocztaPolskaDetails;
+    events: PocztaPolskaDetails[];
     userCode: string;
 }

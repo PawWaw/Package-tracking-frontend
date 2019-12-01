@@ -5,5 +5,5 @@ export class Fedex {
     code: string;
     userCode: string;
     size: number;
-    completedTrackDetails: FedexDetails;
+    completedTrackDetails: FedexDetails[];
 }

@@ -5,6 +5,6 @@ export class DHL {
     code: string;
     userCode: string;
     received_by: string;
-    events: DHLEvent;
+    events: DHLEvent[];
     status: string;
 }

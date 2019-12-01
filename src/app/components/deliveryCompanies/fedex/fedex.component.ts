@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { Fedex } from '../../_models/FedexModels/Fedex';
 import { FedexDetails } from '../../_models/FedexModels/FedexDetails';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { FedexDates } from '../../_models/FedexModels/FedexDates';
 
 @Component({
   selector: 'app-fedex',
@@ -14,10 +16,14 @@ import { FedexDetails } from '../../_models/FedexModels/FedexDetails';
 })
 export class FedexComponent implements OnInit {
   data: Fedex;
-  details: FedexDetails;
   isAnyPackage: Boolean = false;
+  dataSource;
 
   formGroup: FormGroup;
+
+  displayedColumns: string[] = ['type', 'date'];
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,10 +49,10 @@ export class FedexComponent implements OnInit {
   findPackage() {
     this.packageService.getSingleFedex(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
-        this.data = data
-        this.details = this.data.completedTrackDetails;
-        console.log(this.data);
-        console.log(this.details);
+        this.data = data;
+        console.log(this.data.completedTrackDetails[0]);
+        //this.dataSource = new MatTableDataSource<Fedex>(this.data);
+        setTimeout(() => this.dataSource.paginator = this.paginator);
         this.isAnyPackage = true;
       },
       error => {
@@ -60,5 +66,9 @@ export class FedexComponent implements OnInit {
     this._snackBar.open("Done!", "Close", { 
       duration: 2000,
     });
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }

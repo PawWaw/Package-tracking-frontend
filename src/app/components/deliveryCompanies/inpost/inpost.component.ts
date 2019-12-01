@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { InPost } from '../../_models/InPostModels/InPost';
+import { InPostDetails } from '../../_models/InPostModels/InPostDetails';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-inpost',
@@ -14,10 +16,16 @@ import { InPost } from '../../_models/InPostModels/InPost';
 export class InpostComponent implements OnInit {
 
   data: InPost;
+  DATA: InPostDetails[];
+  dataSource;
   isAnyPackage: Boolean = false;
   public textAreaContent;
 
   formGroup: FormGroup;
+
+  displayedColumns: string[] = ['datetime', 'origin_status', 'status'];
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,7 +53,9 @@ export class InpostComponent implements OnInit {
       this.packageService.getSingleInPost(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
         this.data = data;
-        console.log(this.data);
+        this.DATA = this.data.tracking_details;
+        this.dataSource = new MatTableDataSource<InPostDetails>(this.DATA);
+        setTimeout(() => this.dataSource.paginator = this.paginator);
         if(this.data != null)
           this.isAnyPackage = true;
       },

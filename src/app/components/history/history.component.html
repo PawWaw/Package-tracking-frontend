@@ -1,4 +1,6 @@
-<div>
+<html>
+  <body>
+  <div>
     <form class="form">    
       <mat-form-field class="fields">
         <mat-label>Source of data</mat-label >
@@ -14,4 +16,132 @@
       <button mat-raised-button class="button" (click)="findPackages()">Find!</button>
       <button mat-raised-button class="button" (click)="logout()">Logout!</button>
     </form>
-</div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div *ngIf="isAnyPackage" class="table">
+        <div *ngIf="this.isPocztaPolska">
+
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef> Package code </th>
+                    <td mat-cell *matCellDef="let data"> {{this.data.code}} </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="datetime">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let data"> {{this.data.datetime}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="place">
+                  <th mat-header-cell *matHeaderCellDef> Localization </th>
+                  <td mat-cell *matCellDef="let data"> {{this.data.place}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="description">
+                  <th mat-header-cell *matHeaderCellDef> Description </th>
+                  <td mat-cell *matCellDef="let data"> {{this.data.description}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div *ngIf="this.isInPost">
+
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef> Package code </th>
+                    <td mat-cell *matCellDef="let data"> {{this.data.code}} </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="datetime">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let data"> {{this.data.datetime}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let data"> {{ this.data.status}} </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsInPost"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsInPost;"></tr>
+            </table>
+        </div>
+        <div *ngIf="this.isDHL">
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef> Code </th>
+                    <td mat-cell *matCellDef="let data"> {{this.data.code}} </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="timestamp">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let data"> {{this.data.timestamp}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="terminal">
+                  <th mat-header-cell *matHeaderCellDef> Localization </th>
+                  <td mat-cell *matCellDef="let data"> {{this.data.terminal}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="description">
+                  <th mat-header-cell *matHeaderCellDef> Description </th>
+                  <td mat-cell *matCellDef="let data"> {{this.data.description}} </td>
+                </ng-container>
+    
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsDHL"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsDHL;"></tr>
+            </table>
+        </div>
+        <div *ngIf="this.isFedex">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let data"> {{ this.data.type }} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let data"> {{ this.data.date }} </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsFedex"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsFedex;"></tr>
+            </table>
+        </div>
+        <div *ngIf="this.isUPS">
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{this.data.date}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsUPS"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsUPS;"></tr>
+            </table>
+        </div>
+    </div>
+    <div id="footer">
+        <mat-paginator [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]" class="paginator">
+        </mat-paginator>
+    </div>
+    </div>
+</body>
+</html>
+

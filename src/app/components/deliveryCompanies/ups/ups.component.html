@@ -1,15 +1,43 @@
 <html>
     <body>
+        <div id="con">
         <form class="form" [formGroup]="formGroup">         
             <mat-form-field class="fields">
                 <textarea matInput style="resize:none" placeholder="Add your tracking number" formControlName="packageCode"></textarea>
             </mat-form-field>
             <button mat-raised-button class="button" (click)="findPackage()">Find!</button>
         </form>
-        <div *ngIf="isAnyPackage" class="form">
-            <p>Tracking code: {{ this.data.code }}</p>
-            <p>Status: {{ this.data.status }}</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div *ngIf="isAnyPackage" class="table">
+
+            <table mat-table [dataSource]="dataSource">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{this.DATA?.date | async}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div id="footer">
+            <mat-paginator [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]" class="paginator">
+            </mat-paginator>
+        </div>
         </div>
     </body>
 </html>
-

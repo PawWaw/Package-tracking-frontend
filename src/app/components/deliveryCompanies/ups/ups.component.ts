@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackageService } from '../../_services/package.service';
 import { first } from "rxjs/operators";
@@ -6,6 +6,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { UPS } from '../../_models/UPSModels/UPS';
 import { _Package } from '../../_models/UPSModels/_Package';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { Activity } from '../../_models/UPSModels/Activity';
+import { Shipment } from '../../_models/UPSModels/Shipment';
 
 @Component({
   selector: 'app-ups',
@@ -14,9 +17,15 @@ import { _Package } from '../../_models/UPSModels/_Package';
 })
 export class UpsComponent implements OnInit {
   data: UPS;
+  DATA: Shipment[];
+  dataSource;
   isAnyPackage: Boolean;
 
   formGroup: FormGroup;
+
+  displayedColumns: string[] = ['date'];
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,8 +52,9 @@ export class UpsComponent implements OnInit {
     this.packageService.getSingleUPS(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
         this.data = data;
-        console.log(this.data);
-        console.log(this.data.trackResponse);
+        console.log(data);
+        this.dataSource = new MatTableDataSource<Shipment>(this.DATA);
+        setTimeout(() => this.dataSource.paginator = this.paginator);
         this.isAnyPackage = true;
       },
       error => {

@@ -3,7 +3,7 @@ import { Response_ } from './Response_';
 
 export class TrackResponse {
     response: Response_;
-    shipment: Shipment;
+    shipment: Shipment[];
     disclaimer: string;
     additionalProperties: any;
 }

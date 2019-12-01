@@ -18,6 +18,7 @@ export class PackageService {
   pocztapolskaturl = 'http://localhost:8080/package/pocztapolska';
   upsurl = 'http://localhost:8080/package/ups';
   fedexurl = 'http://localhost:8080/package/fedex';
+  unknownurl = 'http://localhost:8080/package/unknown';
 
   constructor(private http: HttpClient) {
   }
@@ -34,8 +35,8 @@ export class PackageService {
     return this.http.get<DHL>(this.dhlurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
-  public getFedex(): Observable<Fedex> {
-    return this.http.get<Fedex>(this.fedexurl, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
+  public getFedex(): Observable<Fedex[]> {
+    return this.http.get<Fedex[]>(this.fedexurl, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
   public getSingleFedex(code: string): Observable<Fedex> {
@@ -64,6 +65,10 @@ export class PackageService {
 
   public getSingleUPS(code: string): Observable<UPS> {
     return this.http.get<UPS>(this.upsurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
+  }
+
+  public getSingleUnknown(code: string): Observable<any> {
+    return this.http.get<any>(this.unknownurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
   errorHandler(error: HttpErrorResponse) {
