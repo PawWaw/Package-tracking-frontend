@@ -6,8 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { UPS } from '../../_models/UPSModels/UPS';
 import { Fedex } from '../../_models/FedexModels/Fedex';
-import { FedexDetails } from '../../_models/FedexModels/FedexDetails';
-import { FedexDates } from '../../_models/FedexModels/FedexDates';
+import { CompletedTrackDetails } from '../../_models/FedexModels/CompletedTrackDetails';
+import { datesOrTimes } from '../../_models/FedexModels/datesOrTimes';
 import { MatPaginator, MatTableDataSource, MatTab } from '@angular/material';
 import { PocztaPolskaDetails } from '../../_models/PocztaPolskaModels/PocztaPolskaDetails';
 import { PocztaPolska } from '../../_models/PocztaPolskaModels/PocztaPolska';
@@ -37,7 +37,7 @@ export class UnknownComponent implements OnInit {
   dataInPost: InPostDetails[];
   dataPocztaPolska: PocztaPolskaDetails[];
   dataDHL: DHLEvent[];
-  dataFedex: FedexDates[];
+  dataFedex: datesOrTimes[];
   dataUPS: Activity[];
 
 

@@ -5,9 +5,9 @@ import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { Fedex } from '../../_models/FedexModels/Fedex';
-import { FedexDetails } from '../../_models/FedexModels/FedexDetails';
+import { CompletedTrackDetails } from '../../_models/FedexModels/CompletedTrackDetails';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { FedexDates } from '../../_models/FedexModels/FedexDates';
+import { datesOrTimes } from '../../_models/FedexModels/datesOrTimes';
 
 @Component({
   selector: 'app-fedex',
@@ -50,8 +50,9 @@ export class FedexComponent implements OnInit {
     this.packageService.getSingleFedex(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
         this.data = data;
-        console.log(this.data.completedTrackDetails[0]);
-        //this.dataSource = new MatTableDataSource<Fedex>(this.data);
+        console.log(this.data);
+        console.log(this.data.completedTrackDetails[0].carrierCode);
+        //this.dataSource = new MatTableDataSource<FedexDates>(this.data);
         setTimeout(() => this.dataSource.paginator = this.paginator);
         this.isAnyPackage = true;
       },

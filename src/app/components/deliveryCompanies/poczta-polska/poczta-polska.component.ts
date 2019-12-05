@@ -16,7 +16,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 export class PocztaPolskaComponent implements OnInit {
   data: PocztaPolska;
   DATA: PocztaPolskaDetails[];
-  dataSource;
+  dataSource: any;
   isAnyPackage: Boolean = false;
 
   formGroup: FormGroup;
