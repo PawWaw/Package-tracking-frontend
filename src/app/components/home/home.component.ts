@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   ){}
 
 ngOnInit(){
-    console.log(localStorage.getItem('current_user'));
     if (localStorage.getItem('current_user') == null) {
       this.router.navigate(['/signin']);
       this._snackBar.open("Log in to see your history!", "Close", {

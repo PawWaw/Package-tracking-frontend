@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { Fedex } from '../../_models/FedexModels/Fedex';
 import { CompletedTrackDetails } from '../../_models/FedexModels/CompletedTrackDetails';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { datesOrTimes } from '../../_models/FedexModels/datesOrTimes';
+import { FedexDates } from '../../_models/FedexModels/FedexDates';
 
 @Component({
   selector: 'app-fedex',
@@ -15,9 +15,9 @@ import { datesOrTimes } from '../../_models/FedexModels/datesOrTimes';
   styleUrls: ['./fedex.component.css']
 })
 export class FedexComponent implements OnInit {
-  data: Fedex;
+  data: FedexDates[];
   isAnyPackage: Boolean = false;
-  dataSource;
+  dataSource: any;
 
   formGroup: FormGroup;
 
@@ -51,8 +51,7 @@ export class FedexComponent implements OnInit {
       data => {
         this.data = data;
         console.log(this.data);
-        console.log(this.data.completedTrackDetails[0].carrierCode);
-        //this.dataSource = new MatTableDataSource<FedexDates>(this.data);
+        this.dataSource = new MatTableDataSource<FedexDates>(this.data);
         setTimeout(() => this.dataSource.paginator = this.paginator);
         this.isAnyPackage = true;
       },
@@ -67,9 +66,5 @@ export class FedexComponent implements OnInit {
     this._snackBar.open("Done!", "Close", { 
       duration: 2000,
     });
-  }
-
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }

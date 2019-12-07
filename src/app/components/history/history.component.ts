@@ -7,6 +7,7 @@ import { PackageService } from '../_services/package.service';
 import { first } from "rxjs/operators";
 import { Observable, throwError } from "rxjs";
 import { MatTableDataSource } from '@angular/material';
+import { FedexDates } from '../_models/FedexModels/FedexDates';
 
 
 export interface Company {
@@ -27,7 +28,7 @@ export interface CompanyGroup {
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-
+  dataFedex: FedexDates[]
   isDHL: Boolean;
   isFedex: Boolean;
   isUPS: Boolean;
@@ -53,7 +54,7 @@ export class HistoryComponent implements OnInit {
   displayedColumnsInPost: string[] = ["code", 'datetime', 'status'];
   displayedColumnsDHL: string[] = ['code', 'timestamp', 'terminal', 'description'];
   displayedColumnsFedex: string[] = ['type', 'date'];
-  displayedColumnsUPS: string[] = ['date'];
+  displayedColumnsUPS: string[] = ['packageCode', 'date', 'time', 'city', 'description'];
 
   ngOnInit() {
     if (localStorage.getItem('current_user') == null) {
@@ -92,7 +93,6 @@ export class HistoryComponent implements OnInit {
   findPackages() {
     if(this.companyControl.value == "allegro-0")
     {
-
       this.openSnackBar();
     }
     else if(this.companyControl.value == "dhl-0")
@@ -100,7 +100,6 @@ export class HistoryComponent implements OnInit {
       this.packageService.getDHL().pipe(first()).subscribe(
         data => {
           this.data = data;
-          console.log(this.data);
           this.dataSource = new MatTableDataSource<any>(this.data);
           setTimeout(() => this.dataSource.paginator = this.paginator);
           this.isDHL = true;
@@ -117,10 +116,16 @@ export class HistoryComponent implements OnInit {
     {
       this.packageService.getFedex().pipe(first()).subscribe(
         data => {
-          console.log(data);
-
+          this.dataFedex = data;
+          console.log(this.dataFedex);
+          this.dataSource = new MatTableDataSource<FedexDates>(this.dataFedex);
+          setTimeout(() => this.dataSource.paginator = this.paginator);
           this.isFedex = true;
           this.isAnyPackage = true;
+          this.isInPost = false;
+          this.isPocztaPolska = false;
+          this.isUPS = false;
+          this.isDHL = false;
         }
       )
       this.openSnackBar();
@@ -130,7 +135,6 @@ export class HistoryComponent implements OnInit {
       this.packageService.getInPost().pipe(first()).subscribe(
         data => {
           this.data = data;
-          console.log(this.data);
           this.dataSource = new MatTableDataSource<any>(this.data);
           setTimeout(() => this.dataSource.paginator = this.paginator);
           this.isAnyPackage = true;
@@ -148,7 +152,6 @@ export class HistoryComponent implements OnInit {
       this.packageService.getPocztaPolska().pipe(first()).subscribe(
         data => {
           this.data = data;
-          console.log(this.data);
           this.dataSource = new MatTableDataSource<any>(this.data);
           setTimeout(() => this.dataSource.paginator = this.paginator);
           this.isPocztaPolska = true;
@@ -165,10 +168,16 @@ export class HistoryComponent implements OnInit {
     {
       this.packageService.getUPS().pipe(first()).subscribe(
         data => {
-          console.log(data);
-
+          this.data = data;
+          console.log(this.data);
+          this.dataSource = new MatTableDataSource<any>(this.data);
+          setTimeout(() => this.dataSource.paginator = this.paginator);
           this.isUPS = true;
           this.isAnyPackage = true;
+          this.isDHL = false;
+          this.isPocztaPolska = false;
+          this.isFedex = false;
+          this.isInPost = false;
         }
       )
       this.openSnackBar();

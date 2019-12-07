@@ -7,6 +7,9 @@ import { UPS } from 'src/app/components/_models/UPSModels/UPS';
 import { Fedex } from 'src/app/components/_models/FedexModels/Fedex';
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
+import { FedexDates } from '../_models/FedexModels/FedexDates';
+import { Activity } from '../_models/UPSModels/Activity';
+import { StatusChanges } from '../_models/UPSModels/StatusChanges';
 
 
 @Injectable({
@@ -19,6 +22,7 @@ export class PackageService {
   upsurl = 'http://localhost:8080/package/ups';
   fedexurl = 'http://localhost:8080/package/fedex';
   unknownurl = 'http://localhost:8080/package/unknown';
+  temp: any;
 
   constructor(private http: HttpClient) {
   }
@@ -35,12 +39,12 @@ export class PackageService {
     return this.http.get<DHL>(this.dhlurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
-  public getFedex(): Observable<Fedex[]> {
-    return this.http.get<Fedex[]>(this.fedexurl, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
+  public getFedex(): Observable<FedexDates[]> {
+    return this.http.get<FedexDates[]>(this.fedexurl, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
-  public getSingleFedex(code: string): Observable<Fedex> {
-    return this.http.get<Fedex>(this.fedexurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
+  public getSingleFedex(code: string): Observable<FedexDates[]> {
+    return this.http.get<FedexDates[]>(this.fedexurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
   public getInPost(): Observable<InPost> {
@@ -59,12 +63,12 @@ export class PackageService {
     return this.http.get<PocztaPolska>(this.pocztapolskaturl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
-  public getUPS(): Observable<UPS> {
-    return this.http.get<UPS>(this.upsurl, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
+  public getUPS(): Observable<StatusChanges[]> {
+    return this.http.get<StatusChanges[]>(this.upsurl, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
-  public getSingleUPS(code: string): Observable<UPS> {
-    return this.http.get<UPS>(this.upsurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
+  public getSingleUPS(code: string): Observable<StatusChanges[]> {
+    return this.http.get<StatusChanges[]>(this.upsurl + "/" + code, {headers: this.httpHeader}).pipe(retry(1), catchError(this.errorHandler));
   }
 
   public getSingleUnknown(code: string): Observable<any> {

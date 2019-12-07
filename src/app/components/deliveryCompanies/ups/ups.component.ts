@@ -5,10 +5,11 @@ import { first } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { UPS } from '../../_models/UPSModels/UPS';
-import { _Package } from '../../_models/UPSModels/_Package';
+import { Packages } from '../../_models/UPSModels/Packages';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Activity } from '../../_models/UPSModels/Activity';
 import { Shipment } from '../../_models/UPSModels/Shipment';
+import { StatusChanges } from '../../_models/UPSModels/StatusChanges';
 
 @Component({
   selector: 'app-ups',
@@ -16,14 +17,13 @@ import { Shipment } from '../../_models/UPSModels/Shipment';
   styleUrls: ['./ups.component.css']
 })
 export class UpsComponent implements OnInit {
-  data: UPS;
-  DATA: Shipment[];
-  dataSource;
-  isAnyPackage: Boolean;
+  DATA: StatusChanges[];
+  dataSource: any;
+  isAnyPackage: Boolean = false;
 
   formGroup: FormGroup;
 
-  displayedColumns: string[] = ['date'];
+  displayedColumns: string[] = ['date', 'time', 'city', 'description'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -51,9 +51,9 @@ export class UpsComponent implements OnInit {
   findPackage() {
     this.packageService.getSingleUPS(this.packageCode.value.toString()).pipe(first()).subscribe(
       data => {
-        this.data = data;
-        console.log(data);
-        this.dataSource = new MatTableDataSource<Shipment>(this.DATA);
+        this.DATA = data;
+        console.log(this.DATA[4].date);
+        this.dataSource = new MatTableDataSource<StatusChanges>(this.DATA);
         setTimeout(() => this.dataSource.paginator = this.paginator);
         this.isAnyPackage = true;
       },

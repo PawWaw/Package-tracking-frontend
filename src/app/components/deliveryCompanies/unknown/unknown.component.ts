@@ -7,14 +7,14 @@ import { Router } from "@angular/router";
 import { UPS } from '../../_models/UPSModels/UPS';
 import { Fedex } from '../../_models/FedexModels/Fedex';
 import { CompletedTrackDetails } from '../../_models/FedexModels/CompletedTrackDetails';
-import { datesOrTimes } from '../../_models/FedexModels/datesOrTimes';
+import { FedexDates } from '../../_models/FedexModels/FedexDates';
 import { MatPaginator, MatTableDataSource, MatTab } from '@angular/material';
 import { PocztaPolskaDetails } from '../../_models/PocztaPolskaModels/PocztaPolskaDetails';
 import { PocztaPolska } from '../../_models/PocztaPolskaModels/PocztaPolska';
 import { InPost } from '../../_models/InPostModels/InPost';
 import { InPostDetails } from '../../_models/InPostModels/InPostDetails';
 import { DHLEvent } from '../../_models/DHLModels/DHLEvent';
-import { _Package } from '../../_models/UPSModels/_Package';
+import { Packages } from '../../_models/UPSModels/Packages';
 import { Activity } from '../../_models/UPSModels/Activity';
 
 @Component({
@@ -37,7 +37,7 @@ export class UnknownComponent implements OnInit {
   dataInPost: InPostDetails[];
   dataPocztaPolska: PocztaPolskaDetails[];
   dataDHL: DHLEvent[];
-  dataFedex: datesOrTimes[];
+  dataFedex: FedexDates[];
   dataUPS: Activity[];
 
 
@@ -125,7 +125,6 @@ export class UnknownComponent implements OnInit {
         {
           this.dataUPS = this.data.trackResponse.shipment._package.activity;
           this.dataSource = new MatTableDataSource<any>(this.dataUPS);
-          console.log(this.data);
           setTimeout(() => this.dataSource.paginator = this.paginator);
           this.isUPS = true;
           this.isFedex = false;

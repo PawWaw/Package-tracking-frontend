@@ -20,7 +20,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .fields {
     width: 100%;
     font-size: medium;
-    align-items: center;
+    align-self: center;
+    position: fixed;
+    left: 450px;
 }
 
 .button {

@@ -1,4 +1,4 @@
-import { datesOrTimes } from './datesOrTimes';
+import { FedexDates } from './FedexDates';
 import { FedexAddress } from './FedexAddress';
 
 export class CompletedTrackDetails {
@@ -8,7 +8,7 @@ export class CompletedTrackDetails {
     operatingCompanyOrCarrierDescription: string;
     packageSequenceNumber: string;
     packageCount: string;
-    datesOrTimes: datesOrTimes[];
+    datesOrTimes: FedexDates[];
     destinationAddress: FedexAddress;
     deliveryAttempts: string;
     totalUniqueAddressCountInConsolidation: string;

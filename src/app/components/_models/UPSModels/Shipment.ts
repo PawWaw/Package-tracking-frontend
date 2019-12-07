@@ -2,7 +2,7 @@ import { ShipmentType } from './ShipmentType';
 import { InquiryNumber } from './InquiryNumber';
 import { Service } from './Service';
 import { ReferenceNumber } from './ReferenceNumber';
-import { _Package } from './_Package';
+import { Packages } from './Packages';
 
 export class Shipment {
     inquiryNumber: InquiryNumber;
@@ -11,7 +11,6 @@ export class Shipment {
     service: Service;
     referenceNumber: ReferenceNumber;
     pickupDate: string;
-    _package: _Package;
+    package: Packages;
     additionalProperties: any;
-    
 }

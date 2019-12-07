@@ -29,7 +29,6 @@ export class AuthService {
     if (data.headers.get("Household")!=null) {
       localStorage.setItem('current_household', data.headers.get("Household"));
     }
-    console.log(localStorage);
   }
 
   logout(){
