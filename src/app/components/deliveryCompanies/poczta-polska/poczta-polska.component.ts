@@ -51,19 +51,20 @@ export class PocztaPolskaComponent implements OnInit {
       data => {
         this.data = data;
         this.DATA = this.data.events;
-        this.dataSource = new MatTableDataSource<PocztaPolskaDetails>(this.DATA);
         setTimeout(() => this.dataSource.paginator = this.paginator);
+        this.dataSource = new MatTableDataSource<PocztaPolskaDetails>(this.DATA);
         this.isAnyPackage = true;
       },
       error => {
         this.isAnyPackage = false;
+        this.openSnackBar("Wrong package number!");
       }
     )
-    this.openSnackBar();
+    this.openSnackBar("Done");
   }
 
-  openSnackBar() {
-    this._snackBar.open("Done!", "Close", { 
+  openSnackBar(text: string) {
+    this._snackBar.open(text, "Close", { 
       duration: 2000,
     });
   }

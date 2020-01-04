@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from "@angular/router";
@@ -6,7 +6,7 @@ import { AuthService } from '../_services/auth.service';
 import { PackageService } from '../_services/package.service';
 import { first } from "rxjs/operators";
 import { Observable, throwError } from "rxjs";
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { FedexDates } from '../_models/FedexModels/FedexDates';
 
 
@@ -38,7 +38,8 @@ export class HistoryComponent implements OnInit {
   dataInPost: any;
   data: any;
   dataSource: any;
-  paginator: any;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -100,8 +101,8 @@ export class HistoryComponent implements OnInit {
       this.packageService.getDHL().pipe(first()).subscribe(
         data => {
           this.data = data;
-          this.dataSource = new MatTableDataSource<any>(this.data);
           setTimeout(() => this.dataSource.paginator = this.paginator);
+          this.dataSource = new MatTableDataSource<any>(this.data);
           this.isDHL = true;
           this.isAnyPackage = true;
           this.isInPost = false;
@@ -135,8 +136,8 @@ export class HistoryComponent implements OnInit {
       this.packageService.getInPost().pipe(first()).subscribe(
         data => {
           this.data = data;
+          setTimeout(() => this.data.paginator = this.paginator);
           this.dataSource = new MatTableDataSource<any>(this.data);
-          setTimeout(() => this.dataSource.paginator = this.paginator);
           this.isAnyPackage = true;
           this.isInPost = true;
           this.isPocztaPolska = false;

@@ -31,3 +31,12 @@
 .button:hover {
     background: #62b6cb;
 }
+
+.table {
+    height: 100px;
+    width: 600px;
+    font-size: medium;
+    align-self: center;
+    position: relative;
+    left: 800px;
+}
